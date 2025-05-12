@@ -1,10 +1,26 @@
-function App() {
+// src/App.tsx
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login.tsx";
+import Dashboard from "./pages/Dashboard.tsx";
+import PrivateRoute from "./components/PrivateRoute.tsx";
+import { AuthProvider } from "./contexts/AuthContexts";
 
+const App: React.FC = () => {
   return (
-    <div>
-      hello 1 2 3 
-    </div>
-  )
-}
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element=
+          {<>
+          <PrivateRoute><Dashboard /></PrivateRoute>
+          <div>hello</div>
+          </>
+          } />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
+};
 
-export default App
+export default App;
