@@ -1,44 +1,31 @@
 // src/components/StudentList.tsx
 import { useEffect, useState } from "react";
-import axios from "../api/mock";
-
-interface Student {
-  id: number;
-  name: string;
-  email: string;
-  course: string;
-}
+import { Link } from "react-router-dom";
+import { useStudents } from "../contexts/StudentContext";
 
 const StudentList: React.FC = () => {
-  const [students, setStudents] = useState<Student[]>([]);
-  const [filtered, setFiltered] = useState<Student[]>([]);
+  const { students } = useStudents(); // from context
+  const [filtered, setFiltered] = useState(students);
   const [filter, setFilter] = useState("");
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchStudents = async () => {
-      try {
-        const res = await axios.get("/api/students");
-        setStudents(res.data.students);
-        setFiltered(res.data.students);
-      } catch (err) {
-        console.error("Error fetching students", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchStudents();
-  }, []);
 
   useEffect(() => {
     const lower = filter.toLowerCase();
-    const result = students.filter((s) => s.course.toLowerCase().includes(lower));
+    const result = students.filter((s) =>
+      s.course.toLowerCase().includes(lower)
+    );
     setFiltered(result);
   }, [filter, students]);
 
-  if (loading) return <p className="p-4">Loading students...</p>;
-
+  if (!students.length && !filtered.length) {
+    return (
+      <div className="p-4 flex justify-center">
+        <svg className="animate-spin h-6 w-6 text-blue-500" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z" />
+        </svg>
+      </div>
+    );
+  }
   return (
     <div className="p-4">
       <div className="mb-4">
@@ -54,17 +41,25 @@ const StudentList: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {filtered.length > 0 ? (
           filtered.map((student) => (
-            <div
+            <Link
+              to={`/students/${student.id}`}
               key={student.id}
-              className="p-4 border rounded shadow hover:shadow-md transition"
+              className="block"
             >
-              <h3 className="text-lg font-semibold">{student.name}</h3>
-              <p className="text-sm text-gray-600">{student.email}</p>
-              <p className="text-sm">Course: <span className="font-medium">{student.course}</span></p>
-            </div>
+              <div className="p-4 border rounded shadow hover:shadow-md transition">
+                <h3 className="text-lg font-semibold">{student.name}</h3>
+                <p className="text-sm text-gray-600">{student.email}</p>
+                <p className="text-sm">
+                  Course:{" "}
+                  <span className="font-medium">{student.course}</span>
+                </p>
+              </div>
+            </Link>
           ))
         ) : (
-          <p className="col-span-full text-center text-gray-500">No students found.</p>
+          <p className="col-span-full text-center text-gray-500">
+            No students found.
+          </p>
         )}
       </div>
     </div>

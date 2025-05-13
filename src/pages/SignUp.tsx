@@ -1,27 +1,26 @@
-// src/pages/Login.tsx
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 
-const Login: React.FC = () => {
+const Signup: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleSignup = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate("/");
+      await createUserWithEmailAndPassword(auth, email, password);
+      navigate("/"); // Redirect to dashboard
     } catch (err) {
-      alert("Login failed");
+      alert("Signup failed");
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="w-full max-w-sm bg-white rounded-xl shadow-md p-6">
-        <h2 className="text-xl font-bold mb-4 text-center">Login</h2>
+        <h2 className="text-xl font-bold mb-4 text-center">Sign Up</h2>
         <input
           type="email"
           placeholder="Email"
@@ -37,15 +36,15 @@ const Login: React.FC = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button
-          onClick={handleLogin}
+          onClick={handleSignup}
           className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
         >
-          Login
+          Sign Up
         </button>
         <p className="text-sm text-center">
-          Don’t have an account?{" "}
-          <a href="/signup" className="text-blue-600 underline hover:text-blue-800">
-            Sign Up
+          Already have an account?{" "}
+          <a href="/login" className="text-blue-600 underline hover:text-blue-800">
+            Login
           </a>
         </p>
       </div>
@@ -53,4 +52,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Signup;

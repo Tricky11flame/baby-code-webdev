@@ -14,6 +14,13 @@ const Dashboard: React.FC = () => {
       >
         Logout
       </button>
+      <a href="/add-student" > 
+        <button
+          className="bg-teal-600 text-white px-4 py-2 rounded"
+        >
+          Add More
+        </button>
+      </a> 
     </div>
   );
 };
