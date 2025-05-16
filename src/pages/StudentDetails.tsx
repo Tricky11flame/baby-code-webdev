@@ -1,7 +1,7 @@
 // src/pages/StudentDetails.tsx
 import { useParams, useNavigate } from "react-router-dom";
 import { useStudents } from "../contexts/StudentContext";
-import { useState } from "react";
+import { useState } from "react"; 
 
 const StudentDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,17 +22,18 @@ const StudentDetails: React.FC = () => {
   };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto bg-white rounded shadow space-y-4">
-      <div className="flex justify-between items-center">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="w-full max-w-sm bg-white rounded-xl border-black border-[1.5px] p-6">
+        <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">{student.name}</h1>
         <button
           onClick={() => navigate("/")}
-          className="bg-gray-200 px-4 py-1 rounded hover:bg-gray-300"
+          className=" border-black border-[1.5px] bg-gray-300 px-4 py-1 rounded hover:bg-gray-400/60"
         >
           Go to Home
         </button>
       </div>
-
+      <img className="rounded-[30pt] mx-auto h-40 mb-5" src={"baby-website.svg"} alt="" />
       <div className="text-lg space-y-1">
         <p><strong>Email:</strong> {student.email}</p>
         <p><strong>Course:</strong> {student.course}</p>
@@ -41,21 +42,21 @@ const StudentDetails: React.FC = () => {
       <div className="flex flex-col sm:flex-row gap-4 mt-6">
         <button
           onClick={() => navigate(`/edit/${student.id}`)}
-          className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+          className=" border-black border-[1.5px] bg-blue-400 text-white px-4 py-2 rounded hover:bg-blue-700/80"
         >
           Edit
         </button>
 
         <button
           onClick={() => setShowConfirm(true)}
-          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+          className=" border-black border-[1.5px] bg-rose-500 text-white px-4 py-2 rounded hover:bg-rose-700/80"
         >
           Delete
         </button>
 
         <button
           onClick={() => navigate("/add")}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className=" border-black border-[1.5px] bg-green-400 text-white px-4 py-2 rounded hover:bg-emerald-600/80"
         >
           Create More
         </button>
@@ -108,6 +109,7 @@ const StudentDetails: React.FC = () => {
         </div>
       )}
     </div>
+      </div>
   );
 };
 

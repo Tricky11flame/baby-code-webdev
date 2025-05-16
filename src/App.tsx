@@ -12,7 +12,7 @@ import EditStudentForm from "./pages/EditStudentForm.tsx";
 
 const App: React.FC = () => {
   return (
-    <StudentProvider >
+    <StudentProvider>
     <AuthProvider>
       <Router>
         <Routes>

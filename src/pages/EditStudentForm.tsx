@@ -61,8 +61,11 @@ const EditStudentForm: React.FC = () => {
   };
 
   return (
-    <div className="p-6 max-w-lg mx-auto bg-white rounded shadow space-y-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+    <div className=" max-w-lg mx-auto bg-white rounded shadow space-y-4 w-full border-black border-[1.5px] p-6">
       <h2 className="text-2xl font-bold text-center">Edit Student</h2>
+      <img className=" rounded-[30pt] mx-auto h-40 mb-5" src={"baby-website.svg"} alt="" />
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1">Name</label>
@@ -73,7 +76,7 @@ const EditStudentForm: React.FC = () => {
             onChange={handleChange}
             className="w-full p-2 border rounded"
           />
-          {errors.name && <p className="text-red-600 text-sm">{errors.name}</p>}
+          {errors.name && <p className="text-rose-700 text-sm">{errors.name}</p>}
         </div>
         <div>
           <label className="block mb-1">Email</label>
@@ -84,7 +87,7 @@ const EditStudentForm: React.FC = () => {
             onChange={handleChange}
             className="w-full p-2 border rounded"
           />
-          {errors.email && <p className="text-red-600 text-sm">{errors.email}</p>}
+          {errors.email && <p className="text-rose-700 text-sm">{errors.email}</p>}
         </div>
         <div>
           <label className="block mb-1">Course</label>
@@ -95,25 +98,26 @@ const EditStudentForm: React.FC = () => {
             onChange={handleChange}
             className="w-full p-2 border rounded"
           />
-          {errors.course && <p className="text-red-600 text-sm">{errors.course}</p>}
+          {errors.course && <p className="text-rose-700 text-sm">{errors.course}</p>}
         </div>
         <div className="flex gap-4 mt-4">
           <button
             type="submit"
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            className="border-black border-[1.5px] bg-green-400 text-white px-4 py-2 rounded hover:bg-emerald-600"
           >
             Save Changes
           </button>
           <button
             type="button"
             onClick={() => navigate("/")}
-            className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"
+            className="border-black border-[1.5px] bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"
           >
             Cancel
           </button>
         </div>
       </form>
     </div>
+  </div>
   );
 };
 

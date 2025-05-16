@@ -93,9 +93,11 @@ const AddStudentForm: React.FC = () => {
   }
 
   return (
-    <div className="p-4 max-w-md mx-auto">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="w-full max-w-sm bg-white rounded-xl border-black border-[1.5px] p-6">
       <h2 className="text-2xl font-semibold text-center">Add New Student</h2>
-      <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+      <img className=" rounded-[30pt] mx-auto h-40 mt-5" src={"baby-website.svg"} alt="" />
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1" htmlFor="name">
             Name
@@ -141,13 +143,14 @@ const AddStudentForm: React.FC = () => {
         <div className="mt-4">
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700"
+            className="w-full bg-green-400 text-white p-2 rounded-md hover:bg-emerald-500"
           >
             Add Student
           </button>
         </div>
       </form>
     </div>
+  </div>
   );
 };
 
